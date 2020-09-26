@@ -8,6 +8,10 @@ def task_get_all(db: Session):
 def task_get_by_id(db: Session, id: int):
     return db.query(models.Task).filter(models.Task.id == id).first()
 
+def task_delete(db: Session, task=models.Task):
+    db.delete(task)
+    db.commit()
+
 def task_create(db: Session, task: schemas.TaskCreate):
     db_task = models.Task(name=task.name)
     db.add(db_task)
